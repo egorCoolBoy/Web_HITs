@@ -1,8 +1,35 @@
 body{
-    background-color: blueviolet;
+    background-image: url("maxresdefault.jpg");
+    background-size: cover;
 }
 h1{
     font-family: 'Times New Roman', Times, serif;
     text-align: center
 }
+.container{
+    text-align: center;
 
+}
+.block{
+    margin: 20px;
+    padding: 10px 20px;
+    border:15px solid black;
+    background-color:rgb(39, 39, 180);
+    width: 300px;
+    height: 150px;
+    border-radius: 20px;
+    display: inline-block;
+
+}
+button {
+    text-align: center;
+    background-color: #bef338; 
+    color: blue;
+    padding: 10px 20px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    border:0cap;
+}
+button:hover {
+    background-color: #cc6d2e; 
+}
