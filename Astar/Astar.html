@@ -7,12 +7,16 @@
     <link rel="stylesheet" href= "Astar.css">
 </head>
 <body>
-    <div class ="myInput">
-        <input type="text" id="myInput" placeholder="Введите размер">
-        <button onclick="showInputValue()">Сохранить число</button>
-        <div id="output" class="centered"></div>
+    <div>
+        <h3 class ="startEnd">Старт/Финиш</h3>
+        <h3 class="wall">Преграда</h3>
     </div>
-    <div id="output" class="centered"></div>
+    <div class="main">
+        <input type="number" id="size" placeholder="Введите размер сетки">
+        <button onclick="createMap()">Создать карту</button>
+        <button onclick="findWay()">Найти путь</button>
+    </div>
+    <div id="grid"></div>
 
     <script src="Astar.js"></script>
 </body>
