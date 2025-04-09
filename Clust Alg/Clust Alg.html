@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clust Alg</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div>
+        <h3>Кластеризация</h3>
+    </div>
+    <div class="main">
+        <input type="number" id="size" placeholder="Введите размер сетки">
+        <input type="number" id="k" placeholder="Введите количество кластеров" min="1">
+        <button onclick="createMap()">Создать карту</button>
+        <button onclick="findWay()">Запустить</button>
+    </div>
+    <div id="grid"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
