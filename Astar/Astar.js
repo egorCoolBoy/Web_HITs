@@ -211,7 +211,7 @@ function aStar(grid, startPos, endPos) {
                 neighbor.f = neighbor.g + neighbor.h;
                 neighbor.prev = currentCell;
 
-                // Если соседа нет в открытом списке — добавляем
+                //соседа нет в открытом списке — добавляем
                 if (!openCell) {
                     openCells.push(neighbor);
                 }
@@ -219,7 +219,7 @@ function aStar(grid, startPos, endPos) {
         }
     }
 
-    // Если путь не найден — возвращаем null
+    //путь не найден — null
     return null;
 }
 
