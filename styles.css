@@ -33,7 +33,7 @@ button {
     padding: 10px 20px; 
     border-radius: 10px; 
     cursor: pointer; 
-    border: 0cap;
+    border: 0;
     box-shadow: 0 4px 10px rgba(97, 218, 251, 0.4);
     transition: all 0.2s ease-in-out;
 }
