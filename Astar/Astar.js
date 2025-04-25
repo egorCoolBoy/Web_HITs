@@ -1,6 +1,10 @@
 document.getElementById('clustAlg').addEventListener('click', function() {
     window.location.href = "../Clust Alg/Clust Alg.html";
 });
+document.getElementById('neuralNet').addEventListener('click', function() 
+{
+    window.location.href = "../Neural Net/NN.html";
+});
 
 let mode = null; 
 let startCell = null;
@@ -29,7 +33,7 @@ function setMode(newMode) {
 // создание сетки линейной
 function createMap() {
     const size = parseInt(document.getElementById('size').value);
-    if (size<2||isNaN(size))
+    if (Number.isNaN(size) || size < 2)
     {
         alert("Введите корректный размер поля")
         return;

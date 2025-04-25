@@ -1,5 +1,9 @@
-document.getElementById('Astar').addEventListener('click', function() {
+document.getElementById('astar').addEventListener('click', function() {
     window.location.href = "../Astar/Astar.html";
+});
+document.getElementById('neuralNet').addEventListener('click', function() 
+{
+    window.location.href = "../Neural Net/NN.html";
 });
 let points = [];
 let centroids = [];

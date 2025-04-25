@@ -18,7 +18,7 @@ document.getElementById('clustAlg').addEventListener('click', function()
 {
     window.location.href = "./Clust Alg/Clust Alg.html";
 });
-document.getElementById('dec Tree').addEventListener('click', function() 
+document.getElementById('decTree').addEventListener('click', function() 
 {
     window.location.href = "./Dec Tree/Dec Tree.html";
 });
