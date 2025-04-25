@@ -1,12 +1,17 @@
+document.getElementById('clustAlg').addEventListener('click', function() {
+    window.location.href = "../Clust Alg/Clust Alg.html";
+});
+
 let mode = null; 
 let startCell = null;
 let endCell = null;
-//установка режима+визуал
+
+// установка режима + визуал
 function setMode(newMode) {
     mode = newMode;
     const buttons = document.querySelectorAll('.mode-buttons button');
 
-    for (let i = 0; i < buttons.length; i++) {
+    for (let i = 0; i < 3; i++) {
         const btn = buttons[i];
 
         if (
@@ -20,9 +25,15 @@ function setMode(newMode) {
         }
     }
 }
-//создание сетки линейной
+
+// создание сетки линейной
 function createMap() {
     const size = parseInt(document.getElementById('size').value);
+    if (size<2||isNaN(size))
+    {
+        alert("Введите корректный размер поля")
+        return;
+    }
     
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
@@ -54,9 +65,10 @@ function createMap() {
         grid.appendChild(cell);
     }
 }
-//обработки кликов
+
+// обработка кликов
 function setStartCell(cell) {
-    if (startCell) {
+    if (startCell !== null) {
         startCell.classList.remove('start');
     }
     startCell = cell;
@@ -64,7 +76,7 @@ function setStartCell(cell) {
 }
 
 function setEndCell(cell) {
-    if (endCell) {
+    if (endCell !== null) {
         endCell.classList.remove('end');
     }
     endCell = cell;
@@ -72,7 +84,7 @@ function setEndCell(cell) {
 }
 
 function toggleWall(cell) {
-    if (cell.classList.contains('wall')) {
+    if (cell.classList.contains('wall') === true) {
         cell.classList.remove('wall');
     } else {
         cell.classList.add('wall');
@@ -80,24 +92,32 @@ function toggleWall(cell) {
 }
 
 function showWay() {
-    const size = Math.sqrt(document.getElementById('grid').children.length);
+    if (!startCell || !endCell) {
+        alert("Укажите старт и финиш");
+        return;
+    }
+    const size = parseInt(document.getElementById('size').value);
     const gridArray = [];
-//создает сетку, 1-стена 0-свободно
+    // создает сетку, 1 - стена, 0 - свободно
     for (let y = 0; y < size; y++) {
         gridArray[y] = [];
         for (let x = 0; x < size; x++) {
             const cell = document.getElementById('grid').children[y * size + x];
-            gridArray[y][x] = cell.classList.contains('wall') ? 1 : 0;
+            gridArray[y][x] = cell.classList.contains('wall') === true ? 1 : 0;
 
-            // Сбрасываю путь
-            cell.classList.remove('path');
-                
+            if (cell.classList.contains('path') === true) {
+                cell.classList.remove('path');
+            }
         }
     }
 
-    const path = aStar(gridArray,{ x: getCellX(startCell), y: getCellY(startCell) },{ x: getCellX(endCell), y: getCellY(endCell) });
+    const path = aStar(
+        gridArray,
+        { x: getCellX(startCell), y: getCellY(startCell) },
+        { x: getCellX(endCell), y: getCellY(endCell) }
+    );
 
-    if (!path) {
+    if (path === null) {
         alert('Путь не найден');
         return;
     }
@@ -110,8 +130,8 @@ function showWay() {
         }
     }
 }
-//координаты клеток x,y
 
+// координаты клеток x,y
 function getCellX(cell) {
     return cell.dataset.index % Math.sqrt(document.getElementById('grid').children.length);
 }
@@ -133,7 +153,7 @@ class Cell {
     }
 }
 
-function manhGap(cellA, cellB) {
+function distance(cellA, cellB) {
     return Math.abs(cellA.x - cellB.x) + Math.abs(cellA.y - cellB.y);
 }
 
@@ -147,9 +167,9 @@ function getNeighbors(currentCell, grid) {
         [1, 0]   
     ];
 
-    for ([dx, dy] of directions) {
-        neighborX = currentCell.x + dx;
-        neighborY = currentCell.y + dy;
+    for (const [dx, dy] of directions) {
+        const neighborX = currentCell.x + dx;
+        const neighborY = currentCell.y + dy;
 
         if (neighborX >= 0 && neighborX < grid[0].length && neighborY >= 0 && neighborY < grid.length) {
 
@@ -175,7 +195,6 @@ function aStar(grid, startPos, endPos) {
         openCells.sort((a, b) => a.f - b.f);
         const currentCell = openCells.shift();
 
-
         closedCells.add(currentCell.y * grid[0].length + currentCell.x);
 
         // проверка на финиш
@@ -186,32 +205,27 @@ function aStar(grid, startPos, endPos) {
                 path.push({ x: cell.x, y: cell.y });
                 cell = cell.prev;
             }
-            return path 
+            return path.reverse(); // чтобы путь шел от старта к финишу
         }
 
-
         const neighbors = getNeighbors(currentCell, grid);
-        //проход по соседям, вычисление g, проверка на открытый закрытый список и присваивание значений
+        // проход по соседям, вычисление g, проверка на открытый/закрытый список и присваивание значений
         for (const neighbor of neighbors) {
             const neighborId = neighbor.y * grid[0].length + neighbor.x;
 
-
-            if (closedCells.has(neighborId)) continue;
-
+            if (closedCells.has(neighborId) === true) continue;
 
             const tentativeG = currentCell.g + 1;
 
-
             const openCell = openCells.find(c => c.x === neighbor.x && c.y === neighbor.y);
 
-            
             if (!openCell || tentativeG < openCell.g) {
                 neighbor.g = tentativeG;
-                neighbor.h = manhGap(neighbor, endCell);
+                neighbor.h = distance(neighbor, endCell);
                 neighbor.f = neighbor.g + neighbor.h;
                 neighbor.prev = currentCell;
 
-                //соседа нет в открытом списке — добавляем
+                // соседа нет в открытом списке — добавляем
                 if (!openCell) {
                     openCells.push(neighbor);
                 }
@@ -219,7 +233,6 @@ function aStar(grid, startPos, endPos) {
         }
     }
 
-    //путь не найден — null
+    // путь не найден — null
     return null;
 }
-

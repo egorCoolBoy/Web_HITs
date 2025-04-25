@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="Astar.css" />
 </head>
 <body>
+    <h3>Astar</h3>
     <div class="main">
         <input type="number" id="size" placeholder="Введите размер сетки" />
         <button onclick="createMap()">Создать карту</button>
@@ -17,9 +18,14 @@
         <button id="btnEnd" onclick="setMode('end')">Финиш</button>
         <button id="btnWall" onclick="setMode('wall')">Препятствие</button>
     </div>
-
-    <div id="grid" ></div>
-
+    <div class="Algs">
+        <button id ="clustAlg">Кластеризации</button>
+        <button id="ant">Муравьиный</button>
+        <button id ="genAlg">Генетический</button>
+        <button id ="neuralNet">Нейронка</button>
+        <button id ="decTree">Дерево</button>
+    </div>
+    <div id="grid"></div>
     <script src="Astar.js"></script>
 </body>
 </html>

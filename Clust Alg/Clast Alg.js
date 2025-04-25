@@ -1,8 +1,16 @@
+document.getElementById('Astar').addEventListener('click', function() {
+    window.location.href = "../Astar/Astar.html";
+});
 let points = [];
 let centroids = [];
 
 function createMap() {
     const size = parseInt(document.getElementById('size').value);
+    if(size<2||isNaN(size))
+    {
+        alert("Введите корректный размер")
+        throw new error();
+    }
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;

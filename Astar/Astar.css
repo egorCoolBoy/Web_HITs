@@ -9,6 +9,21 @@ body {
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+h3{
+    color: #61dafb; 
+    text-align: center;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px rgba(97, 218, 251, 0.7);
+}
+.Algs{
+    margin-left: auto;
+    top: 10px;
+    right: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
 input{
     text-align: center;
     background-color: #61dafb; 
