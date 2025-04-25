@@ -5,6 +5,7 @@ document.getElementById('neuralNet').addEventListener('click', function()
 {
     window.location.href = "../Neural Net/NN.html";
 });
+
 let points = [];
 let centroids = [];
 

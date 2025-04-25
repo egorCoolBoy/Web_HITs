@@ -44,8 +44,7 @@ function createMap() {
     grid.style.gridTemplateColumns = `repeat(${size}, 35px)`;
     grid.style.gridTemplateRows = `repeat(${size}, 35px)`;
 
-    startCell = null;
-    endCell = null;
+    startCell =endCell= null;
 
     for (let i = 0; i < size * size; i++) {
         const cell = document.createElement('div');
@@ -196,7 +195,7 @@ function aStar(grid, startPos, endPos) {
     openCells.push(startCell);
 
     while (openCells.length > 0) {
-        openCells.sort((a, b) => a.f - b.f);
+        
         const currentCell = openCells.shift();
 
         closedCells.add(currentCell.y * grid[0].length + currentCell.x);
