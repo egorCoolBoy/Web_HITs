@@ -30,7 +30,7 @@ function setMode(newMode) {
     }
 }
 
-// создание сетки линейной
+// создание сетки 
 function createMap() {
     const size = parseInt(document.getElementById('size').value);
     if (Number.isNaN(size) || size < 2)
@@ -44,7 +44,7 @@ function createMap() {
     grid.style.gridTemplateColumns = `repeat(${size}, 35px)`;
     grid.style.gridTemplateRows = `repeat(${size}, 35px)`;
 
-    startCell =endCell= null;
+    startCell = endCell = null;
 
     for (let i = 0; i < size * size; i++) {
         const cell = document.createElement('div');
@@ -194,8 +194,9 @@ function aStar(grid, startPos, endPos) {
 
     openCells.push(startCell);
 
-    while (openCells.length > 0) {
-        
+    while (openCells.length) {
+
+        openCells.sort((a, b) => a.f - b.f);
         const currentCell = openCells.shift();
 
         closedCells.add(currentCell.y * grid[0].length + currentCell.x);
@@ -208,7 +209,7 @@ function aStar(grid, startPos, endPos) {
                 path.push({ x: cell.x, y: cell.y });
                 cell = cell.prev;
             }
-            return path.reverse(); // чтобы путь шел от старта к финишу
+            return path.reverse(); 
         }
 
         const neighbors = getNeighbors(currentCell, grid);
@@ -216,7 +217,7 @@ function aStar(grid, startPos, endPos) {
         for (const neighbor of neighbors) {
             const neighborId = neighbor.y * grid[0].length + neighbor.x;
 
-            if (closedCells.has(neighborId) === true) continue;
+            if (closedCells.has(neighborId)) continue;
 
             const tentativeG = currentCell.g + 1;
 
