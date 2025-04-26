@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Распознавание цифр</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            image-rendering: pixelated;
+        }
+
+        #controls {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Нарисуйте цифру</h2>
+    <canvas id="canvas" width="250" height="250"></canvas>
+
+    <div id="controls">
+        <button onclick="predict()">Предсказать</button>
+        <button onclick="clearCanvas()" id="clearBtn">Очистить</button>
+        <button onclick="markCorrect()">Верно</button>
+        <button onclick="markIncorrect()">Неверно</button>
+    </div>
+
+    <p id="result"></p>
+
+    <script src="~/js/site.js"></script>
+</body>
+</html>
